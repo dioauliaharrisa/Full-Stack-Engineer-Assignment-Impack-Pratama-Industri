@@ -39,8 +39,6 @@ export default function HomePage() {
       );
   };
 
-  console.log(products, "🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆");
-
   return (
     <div
       className="flex-container"
