@@ -9,16 +9,35 @@ import {
   CTable,
   CTableDataCell,
   CButton,
+  CModal,
+  CModalHeader,
+  CModalBody,
+  CModalTitle,
+  CModalFooter,
 } from "@coreui/react";
 
 export default function HomePage() {
   const [products, setProducts] = useState(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:3000/products")
       .then((resp) => resp.json())
       .then((data, index) => setProducts(data.data));
   }, []);
+
+  const deleteHandler = (id) => {
+    fetch("http://localhost:3000/products/" + id, {
+      method: "DELETE",
+    })
+      .then((res) => res.json())
+      .then((res) => setVisible(!visible))
+      .then(() =>
+        fetch("http://localhost:3000/products")
+          .then((res) => res.json())
+          .then((res) => setProducts(res.data))
+      );
+  };
 
   console.log(products, "🦆🦆🦆🦆🦆🦆🦆🦆🦆🦆");
 
@@ -44,7 +63,7 @@ export default function HomePage() {
         <CTableBody>
           {products &&
             products.map((e, i) => (
-              <CTableRow>
+              <CTableRow key={i}>
                 <CTableHeaderCell scope="row">{i + 1}</CTableHeaderCell>
                 <CTableDataCell>{e.name}</CTableDataCell>
                 <CTableDataCell>{e.code}</CTableDataCell>
@@ -54,7 +73,29 @@ export default function HomePage() {
                   <Link to={`edit/${e.id}`}>
                     <CButton color="warning">Edit</CButton>
                   </Link>
-                  <CButton color="danger">Delete</CButton>
+                  <CButton onClick={() => setVisible(!visible)} color="danger">
+                    Delete
+                  </CButton>
+                  <CModal visible={visible} onClose={() => setVisible(false)}>
+                    <CModalHeader onClose={() => setVisible(false)}>
+                      <CModalTitle>Modal title</CModalTitle>
+                    </CModalHeader>
+                    <CModalBody>Are you sure?</CModalBody>
+                    <CModalFooter>
+                      <CButton
+                        color="secondary"
+                        onClick={() => setVisible(false)}
+                      >
+                        Close
+                      </CButton>
+                      <CButton
+                        onClick={() => deleteHandler(e.id)}
+                        color="primary"
+                      >
+                        Yes, I'm sure.
+                      </CButton>
+                    </CModalFooter>
+                  </CModal>
                 </CTableDataCell>
               </CTableRow>
             ))}

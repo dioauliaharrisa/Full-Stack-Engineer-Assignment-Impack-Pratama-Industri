@@ -46,6 +46,17 @@ app.post("/products", async (req, res) => {
   }
 });
 
+app.delete("/products/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Product.destroy({ where: { id } });
+    res.status(201).json("deleted");
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Impack Pratama server is running on port ${PORT}.`);
 });

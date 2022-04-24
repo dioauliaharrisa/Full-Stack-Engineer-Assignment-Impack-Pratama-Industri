@@ -1,12 +1,18 @@
 import { CSidebar, CSidebarBrand, CSidebarNav, CNavItem } from "@coreui/react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Sidebar() {
+  const navigate = useNavigate();
   return (
     <CSidebar style={{ width: "20%", height: "100vh" }}>
-      <CSidebarBrand>Impack Pratama Tbk</CSidebarBrand>
+      <CSidebarBrand>
+        <div role="button" onClick={() => navigate("../", { replace: true })}>
+          Impack Pratama Tbk
+        </div>
+      </CSidebarBrand>
+
       <CSidebarNav>
-        <Link to="form">
+        <Link to="create">
           <CNavItem>Add product</CNavItem>
         </Link>
         <Link to="/">
