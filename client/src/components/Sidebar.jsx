@@ -12,12 +12,15 @@ export default function Sidebar() {
       </CSidebarBrand>
 
       <CSidebarNav>
-        <Link to="create">
-          <CNavItem>Add product</CNavItem>
-        </Link>
-        <Link to="/">
-          <CNavItem>Product List</CNavItem>
-        </Link>
+        <CNavItem
+          href="#"
+          onClick={() => navigate("../create", { replace: true })}
+        >
+          Add product
+        </CNavItem>
+        <CNavItem href="#" onClick={() => navigate("../", { replace: true })}>
+          Product List
+        </CNavItem>
       </CSidebarNav>
     </CSidebar>
 

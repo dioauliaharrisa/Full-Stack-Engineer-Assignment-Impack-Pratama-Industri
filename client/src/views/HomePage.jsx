@@ -15,6 +15,7 @@ import {
   CModalTitle,
   CModalFooter,
 } from "@coreui/react";
+import currencyFormatter from "../helpers/currencyFormatter";
 
 export default function HomePage() {
   const [products, setProducts] = useState(null);
@@ -66,7 +67,7 @@ export default function HomePage() {
                 <CTableDataCell>{e.name}</CTableDataCell>
                 <CTableDataCell>{e.code}</CTableDataCell>
                 <CTableDataCell>{e.description}</CTableDataCell>
-                <CTableDataCell>{e.price}</CTableDataCell>
+                <CTableDataCell>{currencyFormatter(e.price)}</CTableDataCell>
                 <CTableDataCell>
                   <Link to={`edit/${e.id}`}>
                     <CButton color="warning">Edit</CButton>
