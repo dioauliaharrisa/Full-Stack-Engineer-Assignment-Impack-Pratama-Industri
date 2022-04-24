@@ -27,6 +27,8 @@ module.exports = {
       unit: {
         type: Sequelize.ENUM,
         allowNull: false,
+        type: Sequelize.ENUM("sheet", "roll", "pcs"),
+        defaultValue: "sheet",
       },
       createdAt: {
         allowNull: false,

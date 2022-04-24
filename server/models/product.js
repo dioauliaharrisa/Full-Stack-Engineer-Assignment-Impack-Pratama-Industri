@@ -17,7 +17,12 @@ module.exports = (sequelize, DataTypes) => {
       name: { type: DataTypes.STRING, allowNull: false },
       description: { type: DataTypes.TEXT, allowNull: false },
       price: { type: DataTypes.INTEGER, allowNull: false },
-      unit: { type: DataTypes.ENUM("sheet", "roll", "pcs"), allowNull: false },
+      unit: {
+        type: DataTypes.ENUM,
+        values: ["sheet", "roll", "pcs"],
+        allowNull: false,
+        defaultValue: "sheet",
+      },
     },
     {
       sequelize,
