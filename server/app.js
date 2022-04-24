@@ -33,11 +33,28 @@ app.get("/products/:id", async (req, res) => {
   }
 });
 
+app.put("/products/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name, code, description, price, unit } = req.body;
+    // console.log(name, code, description, price);
+    const data = await Product.update(
+      { name, code, description, price, unit },
+      { where: { id } }
+    );
+    // console.log(data);
+    res.status(201).json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 app.post("/products", async (req, res) => {
   try {
-    const { name, code, description, price } = req.body;
+    const { name, code, description, price, unit } = req.body;
     // console.log(name, code, description, price);
-    const data = await Product.create({ name, code, description, price });
+    const data = await Product.create({ name, code, description, price, unit });
     // console.log(data);
     res.status(201).json(data);
   } catch (error) {
