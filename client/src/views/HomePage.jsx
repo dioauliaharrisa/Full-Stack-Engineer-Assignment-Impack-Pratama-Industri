@@ -46,20 +46,24 @@ export default function HomePage() {
       style={{ display: "flex", flexDirection: "row" }}
     >
       <Sidebar></Sidebar>
-      <CTable style={{ width: "80%" }} hover>
-        <CTableHead>
+      <CTable
+        style={{ width: "80%", height: "100vh", overflow: "scroll" }}
+        hover
+      >
+        <CTableHead style={{ height: 62 }}>
           <CTableRow>
-            <CTableHeaderCell scope="col">No.</CTableHeaderCell>
+            <CTableHeaderCell >No.</CTableHeaderCell>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>
             <CTableHeaderCell scope="col">Code</CTableHeaderCell>
             <CTableHeaderCell style={{ width: "25%" }} scope="col">
               Description
             </CTableHeaderCell>
             <CTableHeaderCell scope="col">Price</CTableHeaderCell>
+            <CTableHeaderCell scope="col">Unit</CTableHeaderCell>
             <CTableHeaderCell scope="col">Actions</CTableHeaderCell>
           </CTableRow>
         </CTableHead>
-        <CTableBody>
+        <CTableBody style={{ overflow: "scroll" }}>
           {products &&
             products.map((e, i) => (
               <CTableRow key={i}>
@@ -68,6 +72,7 @@ export default function HomePage() {
                 <CTableDataCell>{e.code}</CTableDataCell>
                 <CTableDataCell>{e.description}</CTableDataCell>
                 <CTableDataCell>{currencyFormatter(e.price)}</CTableDataCell>
+                <CTableHeaderCell scope="col">{e.unit}</CTableHeaderCell>
                 <CTableDataCell>
                   <Link to={`edit/${e.id}`}>
                     <CButton color="warning">Edit</CButton>
@@ -77,9 +82,11 @@ export default function HomePage() {
                   </CButton>
                   <CModal visible={visible} onClose={() => setVisible(false)}>
                     <CModalHeader onClose={() => setVisible(false)}>
-                      <CModalTitle>Modal title</CModalTitle>
+                      <CModalTitle>Deletion</CModalTitle>
                     </CModalHeader>
-                    <CModalBody>Are you sure?</CModalBody>
+                    <CModalBody>{`You will delete ${e.name}
+                    with code: ${e.code}.
+                    \n Are you sure?`}</CModalBody>
                     <CModalFooter>
                       <CButton
                         color="secondary"

@@ -38,5 +38,9 @@
 }
 
 .inputBar {
-  margin: 20px;
+  margin-bottom: 20px;
+}
+
+.label {
+  margin-top: 25px;
 }

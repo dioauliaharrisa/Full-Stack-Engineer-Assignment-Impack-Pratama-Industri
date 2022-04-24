@@ -4,7 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Sidebar() {
   const navigate = useNavigate();
   return (
-    <CSidebar style={{ width: "20%", height: "100vh" }}>
+    <CSidebar
+      style={{ width: "20%", height: "100vh", position: "sticky", top: 0 }}
+    >
       <CSidebarBrand>
         <div role="button" onClick={() => navigate("../", { replace: true })}>
           Impack Pratama Tbk
