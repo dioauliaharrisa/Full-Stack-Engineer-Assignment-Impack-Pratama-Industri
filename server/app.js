@@ -22,6 +22,30 @@ app.get("/products", async (req, res) => {
   }
 });
 
+app.get("/products/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await Product.findByPk(id);
+    res.status(200).json({ data });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
+app.post("/products", async (req, res) => {
+  try {
+    const { name, code, description, price } = req.body;
+    // console.log(name, code, description, price);
+    const data = await Product.create({ name, code, description, price });
+    // console.log(data);
+    res.status(201).json(data);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Impack Pratama server is running on port ${PORT}.`);
 });

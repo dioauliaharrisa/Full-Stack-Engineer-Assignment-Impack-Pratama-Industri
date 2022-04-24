@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import {
   CTableRow,
@@ -33,7 +34,9 @@ export default function HomePage() {
             <CTableHeaderCell scope="col">No.</CTableHeaderCell>
             <CTableHeaderCell scope="col">Name</CTableHeaderCell>
             <CTableHeaderCell scope="col">Code</CTableHeaderCell>
-            <CTableHeaderCell scope="col">Description</CTableHeaderCell>
+            <CTableHeaderCell style={{ width: "25%" }} scope="col">
+              Description
+            </CTableHeaderCell>
             <CTableHeaderCell scope="col">Price</CTableHeaderCell>
             <CTableHeaderCell scope="col">Actions</CTableHeaderCell>
           </CTableRow>
@@ -48,7 +51,9 @@ export default function HomePage() {
                 <CTableDataCell>{e.description}</CTableDataCell>
                 <CTableDataCell>{e.price}</CTableDataCell>
                 <CTableDataCell>
-                  <CButton color="warning">Edit</CButton>
+                  <Link to={`edit/${e.id}`}>
+                    <CButton color="warning">Edit</CButton>
+                  </Link>
                   <CButton color="danger">Delete</CButton>
                 </CTableDataCell>
               </CTableRow>

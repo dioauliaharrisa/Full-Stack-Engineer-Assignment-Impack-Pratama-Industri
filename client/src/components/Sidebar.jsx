@@ -1,12 +1,17 @@
 import { CSidebar, CSidebarBrand, CSidebarNav, CNavItem } from "@coreui/react";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   return (
     <CSidebar style={{ width: "20%", height: "100vh" }}>
       <CSidebarBrand>Impack Pratama Tbk</CSidebarBrand>
       <CSidebarNav>
-        <CNavItem href="#">Product List</CNavItem>
-        <CNavItem href="#">Add product</CNavItem>
+        <Link to="form">
+          <CNavItem>Add product</CNavItem>
+        </Link>
+        <Link to="/">
+          <CNavItem>Product List</CNavItem>
+        </Link>
       </CSidebarNav>
     </CSidebar>
 
